@@ -1,0 +1,99 @@
+Blog Portal RESTful API URLs;
+
+-List all posts with pagination support
+/posts?page=1 GET
+
+-Create Post
+/posts POST
+
+-Update a post
+/posts/{id} PUT
+-Delete a Post
+/posts/{id} DELETE
+
+-Search Post
+/posts?search=term;
+
+------------------
+-Search post with pagination support
+/posts?search=term&page=1;
+
+------------------
+Blogs have tags; blogs can have multiple tags
+
+-Lists Tags
+/tags GET
+
+-Get Tags
+/tags/{tagname} GET
+
+-Get a tag and all its posts for rending a tag page?
+/tags/tagname/posts GET
+or
+/tags/tagname?expand=true GET
+
+-Get all posts tagged with both tag A and tag B
+/posts?tag=A&tag=B GET
+
+-Add new tag to an existing post
+/posts/{id} PATCH
+
+-Exposing the tag as a subresource
+/posts/{id}/tags/new-tag PUT (same as one right above)
+
+-Delete tag from an existing post
+/posts/{id}/tags/old-tag DELETE
+
+Tags can apply to multiple posts.
+
+-------------------
+Blogs have comments; each blog can have multiple comments. A comment can only exist when it's attached to a post.
+
+-Get comments of a post
+/posts/{id}/comments GET
+
+-Add a new comment
+/posts/{id}/comments POST
+
+-Get a comment
+/posts/{id}/comments/{id} GET
+
+-Update a comment
+/posts/{id}/comments/{id} PUT
+
+-Delete a comment
+/posts/{id}/comments/{id} DELETE
+
+-Get post id from a comment
+it's in the URL
+
+-Should we include comments as a separate resource?
+No, comments are individual as a subresource only for each post.
+
+------------------
+Each post has an author
+Author can exist outside of posts, similar to tags
+
+-List authors
+/authors GET
+
+-Create an author
+/authors POST
+
+-Get an author
+/authors/{id} GET
+
+-Update an author
+/authors/{id} PUT
+
+-Delete an author
+/authors/{id} DELETE
+
+-List posts of a particular author
+/posts?author={id} GET using query parameter.
+
+/authors/{id}/posts GET - better, can use for our POST request as well
+
+-Create a new post
+/authors/{id}/posts POST
+
